@@ -3,15 +3,19 @@
  * Ermöglicht Offline-Nutzung und App-Installation
  */
 
-const CACHE_NAME = 'wochenplan-v1';
+const CACHE_NAME = 'wochenplan-v2';
+// Relative Pfade, damit es auch unter /wochenplan/ auf GitHub Pages funktioniert
 const ASSETS = [
-    '/',
-    '/index.html',
-    '/manifest.json',
-    '/src/app.js',
-    '/src/core/storage.js',
-    '/src/core/recipe.js',
-    '/src/utils/helpers.js'
+    './',
+    './index.html',
+    './manifest.json',
+    './src/app.js',
+    './src/core/storage.js',
+    './src/core/recipe.js',
+    './src/core/filter.js',
+    './src/utils/helpers.js',
+    './data/taxonomy.json',
+    './data/recipes/index.json'
 ];
 
 /**
@@ -54,8 +58,8 @@ self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (event.request.method !== 'GET') return;
 
-    // API Requests (GitHub, etc.) - Network first
-    if (event.request.url.includes('api.github.com')) {
+    // API Requests (GitHub) und Rezeptdaten - Network first, damit neue Rezepte ankommen
+    if (event.request.url.includes('api.github.com') || event.request.url.includes('/data/')) {
         event.respondWith(
             fetch(event.request)
                 .then((response) => {

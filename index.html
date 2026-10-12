@@ -190,6 +190,7 @@
         }
 
         input[type="text"],
+        input[type="search"],
         input[type="number"],
         textarea,
         select {
@@ -230,6 +231,131 @@
             margin-bottom: 1rem;
         }
 
+        /* Filter-Panel */
+        .filter-panel {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .filter-panel summary {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .filter-count {
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+            margin-left: 0.4rem;
+        }
+
+        .filter-body {
+            padding: 0 1rem 1rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .filter-group h4 {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .chip {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: inherit;
+            border-radius: 16px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.85rem;
+        }
+
+        .chip[aria-pressed="true"] {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .chip.exclude[aria-pressed="true"] {
+            background: var(--danger);
+            border-color: var(--danger);
+        }
+
+        .filter-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .filter-result {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .badge {
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+        }
+
+        .check-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem 1rem;
+        }
+
+        .check-grid label {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .hint {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 0.3rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="text"], input[type="number"], input[type="search"], textarea, select {
+                background: #2a2a2a;
+                color: #eee;
+                border-color: #444;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .recipe-grid {
@@ -242,6 +368,10 @@
 
             nav {
                 flex-wrap: wrap;
+            }
+
+            .filter-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -262,6 +392,53 @@
         <!-- Rezepte-Übersicht -->
         <div id="recipes-view" class="container active">
             <h2>Meine Rezepte</h2>
+
+            <details class="filter-panel" id="filter-panel">
+                <summary>🔍 Suchen &amp; Filtern<span class="filter-count" id="filter-count" hidden></span></summary>
+                <div class="filter-body">
+                    <div class="filter-row">
+                        <div>
+                            <label for="filter-text">Freitext</label>
+                            <input type="search" id="filter-text" placeholder="Titel, Zutat oder Tag">
+                        </div>
+                        <div>
+                            <label for="filter-ingredients">Zutaten (alle müssen drin sein)</label>
+                            <input type="search" id="filter-ingredients" placeholder="z.B. grünkohl, knoblauch">
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Ernährung (alle gewählten)</h4>
+                        <div class="chips" id="filter-diet"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Zubereitung (eine davon)</h4>
+                        <div class="chips" id="filter-methods"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Kategorie</h4>
+                        <div class="chips" id="filter-categories"></div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Gerät nicht vorhanden</h4>
+                        <div class="chips" id="filter-exclude"></div>
+                    </div>
+
+                    <div class="filter-actions">
+                        <div>
+                            <label for="filter-time">Dauer</label>
+                            <select id="filter-time"></select>
+                        </div>
+                        <label class="toggle"><input type="checkbox" id="filter-camping"> ⛺ Nur campingtauglich</label>
+                        <button type="button" class="btn-secondary" id="filter-reset">Zurücksetzen</button>
+                    </div>
+                </div>
+            </details>
+
+            <p class="filter-result" id="filter-result"></p>
             <div class="empty-state" id="recipes-empty">
                 <h2>📚 Noch keine Rezepte</h2>
                 <p>Beginne damit, dein erstes Rezept hinzuzufügen!</p>
@@ -303,6 +480,32 @@
                         <option value="medium">Mittel</option>
                         <option value="hard">Schwierig</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-servings">Portionen</label>
+                    <input type="number" id="recipe-servings" placeholder="4" min="1">
+                </div>
+
+                <div class="form-group">
+                    <label for="recipe-category">Kategorie</label>
+                    <select id="recipe-category"></select>
+                </div>
+
+                <div class="form-group">
+                    <label>Ernährung</label>
+                    <div class="check-grid" id="form-diet"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Zubereitungsart</label>
+                    <div class="check-grid" id="form-methods"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Benötigte Küchengeräte</label>
+                    <div class="check-grid" id="form-equipment"></div>
+                    <p class="hint">Daraus berechnet die App, ob das Rezept campingtauglich ist.</p>
                 </div>
 
                 <div class="form-group">

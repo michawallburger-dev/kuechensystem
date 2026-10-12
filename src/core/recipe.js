@@ -15,8 +15,13 @@ class RecipeManager {
             id: generateUUID(),
             title: data.title,
             source: data.source || null,
+            category: data.category || null,
+            servings: parseInt(data.servings) || null,
             cookTime: parseInt(data.cookTime) || null,
             difficulty: data.difficulty || 'medium',
+            diet: data.diet || {},
+            cookingMethods: data.cookingMethods || [],
+            equipment: data.equipment || [],
             ingredients: this.parseIngredients(data.ingredients),
             instructions: data.instructions || '',
             tags: this.parseTags(data.tags),
@@ -45,6 +50,47 @@ class RecipeManager {
 
         await storage.saveRecipe(recipe);
         return recipe;
+    }
+
+    /**
+     * Importiere Rezepte aus dem Repo (data/recipes/).
+     * Nur Rezepte, deren id lokal noch fehlt, werden angelegt.
+     * Lokale Änderungen und Feedback bleiben so unangetastet.
+     */
+    async importBundledRecipes(basePath = 'data/recipes/') {
+        let index;
+        try {
+            const res = await fetch(basePath + 'index.json', { cache: 'no-cache' });
+            if (!res.ok) return 0;
+            index = await res.json();
+        } catch (err) {
+            console.warn('Rezept-Index nicht erreichbar (offline?):', err);
+            return 0;
+        }
+
+        const existing = new Set((await storage.getAllRecipes()).map(r => r.id));
+        let imported = 0;
+
+        for (const file of index.recipes || []) {
+            try {
+                const res = await fetch(basePath + file, { cache: 'no-cache' });
+                if (!res.ok) continue;
+                const recipe = await res.json();
+                if (!recipe.id || existing.has(recipe.id)) continue;
+
+                recipe.tags = recipe.tags || [];
+                recipe.photos = recipe.photos || [];
+                recipe.feedback = recipe.feedback || {
+                    childrenRating: null, adultsRating: null, lastUsed: null,
+                    timeTaken: null, notes: [], occurrences: 0
+                };
+                await storage.saveRecipe(recipe);
+                imported++;
+            } catch (err) {
+                console.warn(`Rezept ${file} konnte nicht importiert werden:`, err);
+            }
+        }
+        return imported;
     }
 
     /**

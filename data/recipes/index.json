@@ -1,0 +1,6 @@
+{
+  "_info": "Liste aller Rezeptdateien in diesem Ordner. Neue Datei hier eintragen, dann importiert die App sie beim nächsten Start.",
+  "recipes": [
+    "gruenkohlpasta.json"
+  ]
+}

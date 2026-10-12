@@ -10,6 +10,8 @@ Intelligente Wochenplan- und Rezept-Verwaltung für Familien. Plane Mahlzeiten a
 - [x] Rezept-Import von URLs
 - [x] Lokale Speicherung (IndexedDB)
 - [ ] Basis-UI für Rezepte
+- [x] Suchen & Filtern: Zutaten, Ernährung, Zubereitungsart, Kategorie, Dauer, Geräte, campingtauglich
+- [x] Rezepte aus `data/recipes/` werden beim Start importiert (Liste in `data/recipes/index.json`)
 
 ### Phase 2
 - [ ] 7-Tage Wochenplan-Generator
