@@ -3,7 +3,7 @@
  * Ermöglicht Offline-Nutzung und App-Installation
  */
 
-const CACHE_NAME = 'wochenplan-v2';
+const CACHE_NAME = 'wochenplan-v3';
 // Relative Pfade, damit es auch unter /wochenplan/ auf GitHub Pages funktioniert
 const ASSETS = [
     './',

@@ -231,6 +231,87 @@
             margin-bottom: 1rem;
         }
 
+        /* Rezept-Detail */
+        .recipe-detail {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            max-width: 900px;
+        }
+
+        .recipe-detail h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-facts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-columns {
+            display: grid;
+            grid-template-columns: minmax(220px, 1fr) 2fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .recipe-detail h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .ingredient-list {
+            list-style: none;
+        }
+
+        .recipe-detail .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .ingredient-list li {
+            padding: 0.35rem 0;
+            border-bottom: 1px solid var(--border);
+            display: grid;
+            grid-template-columns: 5.5rem 1fr;
+            column-gap: 0.5rem;
+        }
+
+        .ingredient-list .amount {
+            font-weight: 600;
+        }
+
+        .ingredient-list .alt {
+            grid-column: 2;
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .step-list {
+            padding-left: 1.4rem;
+        }
+
+        .step-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .detail-section {
+            margin-top: 1.5rem;
+        }
+
+        .tip {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
         /* Filter-Panel */
         .filter-panel {
             background: var(--bg-light);
@@ -370,8 +451,13 @@
                 flex-wrap: wrap;
             }
 
-            .filter-row {
+            .filter-row,
+            .detail-columns {
                 grid-template-columns: 1fr;
+            }
+
+            .recipe-detail {
+                padding: 1rem;
             }
         }
     </style>
@@ -444,6 +530,12 @@
                 <p>Beginne damit, dein erstes Rezept hinzuzufügen!</p>
             </div>
             <div class="recipe-grid" id="recipe-grid"></div>
+        </div>
+
+        <!-- Rezept-Detail -->
+        <div id="recipe-detail-view" class="container">
+            <button type="button" class="btn-secondary" id="detail-back">← Zurück zu den Rezepten</button>
+            <article class="recipe-detail" id="recipe-detail"></article>
         </div>
 
         <!-- Wochenplan-Ansicht -->

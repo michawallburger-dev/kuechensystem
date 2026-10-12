@@ -196,6 +196,9 @@ class WochenplanApp {
         });
         document.getElementById('filter-reset').addEventListener('click', () => this.resetFilters());
 
+        // Detail-Ansicht
+        document.getElementById('detail-back').addEventListener('click', () => this.switchView('recipes'));
+
         // Rezept-Form
         document.getElementById('recipe-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -318,14 +321,85 @@ class WochenplanApp {
     }
 
     /**
-     * Hole Rezept-Detail (für später: Modal/neue Seite)
+     * Zeige Rezept-Detail
      */
     async viewRecipe(id) {
         const recipe = await recipeManager.getRecipe(id);
-        console.log('Recipe:', recipe);
+        if (!recipe) {
+            alert('❌ Rezept nicht gefunden');
+            return;
+        }
 
-        // TODO: Modal oder Detail-Page öffnen
-        alert(`Rezept: ${recipe.title}\n\nOeffnen Sie die Browser-Console für Details.`);
+        document.getElementById('recipe-detail').innerHTML = this.renderRecipeDetail(recipe);
+        this.switchView('recipe-detail');
+        window.scrollTo(0, 0);
+    }
+
+    renderRecipeDetail(recipe) {
+        const esc = (t) => this.escapeHtml(t ?? '');
+
+        const diets = DIET_OPTIONS.filter(d => hasDiet(recipe, d.key));
+        const equipment = (recipe.equipment || []).map(e => (typeof e === 'string' ? e : e.name));
+        const camping = equipment.length > 0 &&
+            isCampingFriendly(recipe, this.taxonomy.campingEquipment?.available || []);
+
+        const ingredients = (recipe.ingredients || []).map(i => {
+            const amount = [i.amount ?? '', i.unit || ''].join(' ').trim();
+            return `<li>
+                <span class="amount">${esc(amount)}</span><span>${esc(i.name)}</span>
+                ${i.veganAlternative ? `<span class="alt">vegan: ${esc(i.veganAlternative)}</span>` : ''}
+            </li>`;
+        }).join('');
+
+        // Schritte: bevorzugt als Liste, sonst aus dem Anleitungstext
+        let steps = Array.isArray(recipe.steps) && recipe.steps.length ? recipe.steps : null;
+        if (!steps && recipe.instructions) {
+            steps = recipe.instructions.split('\n')
+                .map(l => l.replace(/^\s*\d+[.)]\s*/, '').trim())
+                .filter(Boolean);
+        }
+        const stepsHtml = steps && steps.length
+            ? `<ol class="step-list">${steps.map(st => `<li>${esc(st)}</li>`).join('')}</ol>`
+            : '<p>Keine Anleitung hinterlegt.</p>';
+
+        const tips = (recipe.tips || []).map(t => `<p class="tip">${esc(t)}</p>`).join('');
+        const childNotes = recipe.variants?.children?.notes;
+
+        return `
+            <h2>${esc(recipe.title)}</h2>
+            <div class="detail-facts">
+                ${recipe.servings ? `<span>🍽️ ${recipe.servings} Portionen</span>` : ''}
+                <span>⏱️ ${recipe.cookTime ? 'ca. ' + recipe.cookTime + ' Min.' : 'Dauer unbekannt'}</span>
+                ${recipe.category ? `<span>📂 ${esc(recipe.category)}</span>` : ''}
+                <span>📊 ${this.getDifficultyLabel(recipe.difficulty)}</span>
+                ${camping ? '<span>⛺ campingtauglich</span>' : ''}
+            </div>
+            ${diets.length ? `<div class="tags" style="margin-bottom:0.5rem;">${diets.map(d => `<span class="badge">${esc(d.label)}</span>`).join('')}</div>` : ''}
+            ${(recipe.cookingMethods || []).length ? `<div class="tags">${recipe.cookingMethods.map(m => `<span class="tag">${esc(m)}</span>`).join('')}</div>` : ''}
+
+            <div class="detail-columns">
+                <section>
+                    <h3>Zutaten</h3>
+                    ${ingredients ? `<ul class="ingredient-list">${ingredients}</ul>` : '<p>Keine Zutaten hinterlegt.</p>'}
+                    ${equipment.length ? `
+                        <div class="detail-section">
+                            <h3>Küchengeräte</h3>
+                            <p>${equipment.map(esc).join(', ')}</p>
+                        </div>` : ''}
+                </section>
+                <section>
+                    <h3>Zubereitung</h3>
+                    ${stepsHtml}
+                    ${tips ? `<div class="detail-section"><h3>Tipps</h3>${tips}</div>` : ''}
+                    ${childNotes ? `<div class="detail-section"><h3>Kinder-Variante</h3><p>${esc(childNotes)}</p></div>` : ''}
+                </section>
+            </div>
+            ${recipe.source ? `<p class="hint detail-section">Quelle: ${esc(recipe.source)}</p>` : ''}
+        `;
+    }
+
+    getDifficultyLabel(difficulty) {
+        return { easy: 'einfach', medium: 'mittel', hard: 'schwierig' }[difficulty] || '–';
     }
 
     /**
