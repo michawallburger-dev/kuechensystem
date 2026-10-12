@@ -1,0 +1,74 @@
+{
+  "id": "gruenkohlpasta",
+  "title": "Grünkohlpasta",
+  "source": "Kochbuch (Foto), Kapitel Hauptgerichte",
+  "category": "hauptgericht",
+  "servings": 4,
+  "cookTime": 30,
+  "difficulty": "easy",
+
+  "diet": {
+    "vegetarisch": true,
+    "vegan": false,
+    "veganMoeglich": true,
+    "ohneSchwein": true,
+    "ohneFleisch": true,
+    "ohneFisch": true,
+    "laktosefrei": false,
+    "glutenfrei": false,
+    "nussfrei": false
+  },
+
+  "cookingMethods": ["pfanne", "pasta"],
+
+  "equipment": [
+    { "name": "Pfanne", "required": true },
+    { "name": "Kochtopf", "required": true },
+    { "name": "Standmixer", "required": true }
+  ],
+  "campingTauglich": false,
+
+  "ingredients": [
+    { "name": "Walnüsse oder Sonnenblumenkerne", "amount": 100, "unit": "g", "search": ["walnüsse", "sonnenblumenkerne", "nüsse"] },
+    { "name": "Pflanzendrink", "amount": 200, "unit": "ml", "search": ["pflanzendrink", "hafermilch", "sojamilch"] },
+    { "name": "frischer Grünkohl", "amount": 250, "unit": "g", "search": ["grünkohl"] },
+    { "name": "Knoblauchzehen, abgezogen", "amount": 2, "unit": "Stk", "search": ["knoblauch"] },
+    { "name": "Öl zum Braten", "amount": null, "unit": "", "search": ["öl"] },
+    { "name": "aromatischer Käse, gerieben", "amount": 50, "unit": "g", "search": ["käse"],
+      "veganAlternative": "veganer Käse oder 2 EL Hefeflocken" },
+    { "name": "Salz, Pfeffer", "amount": null, "unit": "", "search": ["salz", "pfeffer"] },
+    { "name": "Pasta", "amount": null, "unit": "für 4 Portionen", "search": ["pasta", "nudeln"] }
+  ],
+
+  "steps": [
+    "Nüsse bzw. Kerne ohne Fett in einer Pfanne goldbraun rösten.",
+    "Mit dem Pflanzendrink im Standmixer sehr glatt pürieren. Das dauert je nach Mixer etwas länger.",
+    "Den Strunk aus dem Grünkohl schneiden. Blätter und Knoblauch fein hacken und einige Minuten in Öl bei mittlerer Hitze braten.",
+    "Die Nudeln nach Packungsanweisung kochen.",
+    "Die Nusssauce unter den Kohl rühren und bei kleiner Hitze kurz einköcheln lassen. Ist sie zu dick, etwas Wasser dazugeben.",
+    "Den Käse einrühren und mit Salz und Pfeffer abschmecken.",
+    "Mit den Nudeln servieren."
+  ],
+  "instructions": "1. Nüsse bzw. Kerne ohne Fett in einer Pfanne goldbraun rösten.\n2. Mit dem Pflanzendrink im Standmixer sehr glatt pürieren. Das dauert je nach Mixer etwas länger.\n3. Den Strunk aus dem Grünkohl schneiden. Blätter und Knoblauch fein hacken und einige Minuten in Öl bei mittlerer Hitze braten.\n4. Die Nudeln nach Packungsanweisung kochen.\n5. Die Nusssauce unter den Kohl rühren und bei kleiner Hitze kurz einköcheln lassen. Ist sie zu dick, etwas Wasser dazugeben.\n6. Den Käse einrühren und mit Salz und Pfeffer abschmecken.\n7. Mit den Nudeln servieren.",
+  "tips": [
+    "Die Grünkohlstiele kannst du für ein Wokgericht oder ein Pesto verwenden.",
+    "Vegan: statt Käse veganen Käse oder 2 EL Hefeflocken verwenden."
+  ],
+
+  "tags": ["hauptgericht", "vegetarisch", "vegan-möglich", "ohne-schwein", "pfanne", "pasta", "grünkohl", "saisonal-winter", "unter-30-min"],
+
+  "photos": [],
+  "variants": {
+    "children": { "ingredients": [], "instructions": "", "notes": "" }
+  },
+  "feedback": {
+    "childrenRating": null,
+    "adultsRating": null,
+    "lastUsed": null,
+    "timeTaken": null,
+    "notes": [],
+    "occurrences": 0
+  },
+  "createdAt": "2026-10-12T00:00:00.000Z",
+  "updatedAt": "2026-10-12T00:00:00.000Z"
+}

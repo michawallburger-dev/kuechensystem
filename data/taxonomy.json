@@ -1,0 +1,33 @@
+{
+  "_info": "Feste Begriffe für Rezept-Filter. Neue Rezepte nur mit diesen Werten taggen, damit die Suche zuverlässig funktioniert.",
+
+  "category": ["hauptgericht", "beilage", "suppe", "salat", "frühstück", "snack", "dessert", "backen"],
+
+  "diet": {
+    "vegetarisch": "kein Fleisch, kein Fisch",
+    "vegan": "keine tierischen Produkte",
+    "veganMoeglich": "mit angegebener Alternative vegan",
+    "ohneSchwein": "kein Schweinefleisch, keine Gelatine/Speck vom Schwein",
+    "ohneFleisch": "kein Fleisch",
+    "ohneFisch": "kein Fisch, keine Meeresfrüchte",
+    "laktosefrei": "keine Milchprodukte mit Laktose",
+    "glutenfrei": "keine glutenhaltigen Zutaten",
+    "nussfrei": "keine Nüsse"
+  },
+
+  "cookingMethods": ["ofen", "pfanne", "onepot", "suppe", "pasta", "fisch", "fleisch", "süß", "grill", "ohne-kochen"],
+
+  "equipment": ["Herd", "Kochtopf", "Pfanne", "Wok", "Backofen", "Auflaufform", "Backblech", "Standmixer", "Pürierstab", "Küchenmaschine", "Reibe", "Sieb", "Grill"],
+
+  "campingEquipment": {
+    "_info": "Geräte, die beim Campen verfügbar sind. Rezept ist campingTauglich, wenn alle required-Geräte hier drinstehen.",
+    "available": ["Herd", "Kochtopf", "Pfanne", "Reibe", "Sieb", "Grill"]
+  },
+
+  "durationFilter": [
+    { "label": "bis 20 Min.", "max": 20 },
+    { "label": "bis 30 Min.", "max": 30 },
+    { "label": "bis 45 Min.", "max": 45 },
+    { "label": "über 45 Min.", "min": 46 }
+  ]
+}
