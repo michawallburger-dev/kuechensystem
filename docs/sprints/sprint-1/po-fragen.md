@@ -3,7 +3,7 @@
 ## Erkenntnisse aus der Sichtung
 - **wochenplan/:** Rezeptmodell ist ausgebaut (Zutaten mit Menge, Einheit und Suchbegriffen; Ernährungsformen; Geräte; Camping; Kindervariante und Feedback als Felder vorbereitet). Bisher gibt es ein Rezept (Grünkohlpasta). Wochenplan, Generator, Kochmodus und Sync sind nur geplant. Das README beschreibt einen Sync über GitHub-Token, der noch nicht gebaut ist und bei einem öffentlichen Repo so nicht in Frage kommt.
 - **vorratskammer/:** Produkte mit Name, Marke, Menge, Einheit (Freitext), Kategorie, Lagerort, MHD und eingefroren, gespeichert in localStorage. Barcode-Scan und Open Food Facts. Keine Verbindung zu Rezepten.
-- **vorratskammer/Produktplan.csv (Jira):** Familien-Sync über Supabase (Haushalte, Einladungscode, Magic Link, Echtzeit, offline), Desktop-Ansicht, UX-Ideen. Nichts davon umgesetzt außer MHD-Balken und Gruppierung nach Lagerort.
+- **Jira-Export (ehemals `vorratskammer/Produktplan.csv`, jetzt in `docs/backlog.md`):** Familien-Sync über Supabase (Haushalte, Einladungscode, Magic Link, Echtzeit, offline), Desktop-Ansicht, UX-Ideen. Nichts davon umgesetzt außer MHD-Balken und Gruppierung nach Lagerort.
 - **Lücke für das Zusammenspiel:** Zutaten im Rezept und Produkte im Vorrat haben keine gemeinsame Benennung und keine einheitlichen Einheiten. Das wird für Einkaufsliste und Abbuchen entscheidend.
 
 ## Fragerunde 1
