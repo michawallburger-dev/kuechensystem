@@ -1,17 +1,9 @@
 # Projektstatus Küchensystem
 
-Diese Datei ist die Übergabe zwischen Sessions und Rechnern. Sie wird am Ende jeder Phase aktualisiert.
+Kurze Übergabe zwischen Sessions und Rechnern. Bei Widerspruch zu `git log` gilt `git log`.
 
-## Aktuell
-- **Sprint:** 1
-- **Aktive Rolle:** Product Owner (noch nicht begonnen)
-- **Letzte Freigabe:** Prozess-Setup (2026-10-21)
-- **Nächster Schritt:** Product Owner sichtet beide Repos und `../vorratskammer/Produktplan.csv` und stellt die ersten Fragen.
-
-## Offene Fragen
-- Werden Wochenplan und Vorratskammer eine App oder zwei Apps mit gemeinsamem Datenformat? (klärt PO mit Architekt)
-
-## Verlauf
-| Datum | Rechner | Sprint | Rolle | Ergebnis |
-|---|---|---|---|---|
-| 2026-10-21 | Laptop | – | Setup | `CLAUDE.md`, QA-Subagent und Statusdatei angelegt |
+- **Aktiver Branch:** `setup/pc-review`
+- **Sprint:** 1 (noch nicht begonnen; Vorarbeit liegt auf Branch `sprint-1`)
+- **Rolle:** Setup
+- **Letzte Freigabe:** Prozess-Setup in `main` (2026-10-21)
+- **Nächster Schritt:** Entscheidung, ob `wochenplan` und `vorratskammer` ein Repo werden; danach Setup-Branch nach `main` mergen.

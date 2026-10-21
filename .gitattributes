@@ -1,0 +1,8 @@
+# Zeilenenden im Repo einheitlich als LF, unabhängig von core.autocrlf auf dem jeweiligen Rechner
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.webp binary
