@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Küchensystem</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>🍳</text></svg>">
+<style>
+  :root { --bg: #f7f5f0; --fg: #1f1d1a; --muted: #5c574f; --card: #ffffff; --line: #e2ddd3; --accent: #2f6b4f; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #171614; --fg: #f1eee8; --muted: #b3ada3; --card: #22201d; --line: #38342e; --accent: #7fc4a0; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 17px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 32rem; margin: 0 auto; padding: 2.5rem 1rem; }
+  h1 { font-size: 1.8rem; margin: 0 0 .25rem; }
+  p { color: var(--muted); margin: 0 0 2rem; }
+  a.app { display: flex; align-items: center; gap: 1rem; min-height: 4.5rem; padding: 1rem 1.25rem; margin-bottom: .75rem;
+          background: var(--card); border: 1px solid var(--line); border-radius: 14px; color: inherit; text-decoration: none; }
+  a.app:hover, a.app:focus-visible { border-color: var(--accent); outline: none; }
+  a.app span.icon { font-size: 2rem; }
+  a.app strong { display: block; font-size: 1.1rem; }
+  a.app small { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Küchensystem</h1>
+  <p>Daten bleiben auf diesem Gerät.</p>
+  <a class="app" href="wochenplan/"><span class="icon" aria-hidden="true">🍽️</span><span><strong>Wochenplan</strong><small>Rezepte und Planung</small></span></a>
+  <a class="app" href="vorratskammer/"><span class="icon" aria-hidden="true">🥫</span><span><strong>Vorratskammer</strong><small>Vorräte und Haltbarkeit</small></span></a>
+</main>
+</body>
+</html>
