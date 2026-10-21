@@ -79,3 +79,5 @@ Ergebnis: "Freigabe" oder "Zurück an Entwickler" mit konkreter Fehlerliste.
 - Tests laufen mit `node --test tests/` und brauchen **Node.js 22 oder neuer** (PC: 22.x, Laptop: 24.x). Nur Sprachmittel und Module verwenden, die es in Node 22 gibt.
 - Zeilenenden regelt `.gitattributes` (LF im Repo). Die Rechner haben unterschiedliche `core.autocrlf`-Einstellungen; die Datei nicht entfernen.
 - Der Laptop hat wenig RAM und Speicher: keine Build-Toolchains, kein `node_modules`, keine Docker-Images.
+- Die Vorschau lässt sich auch über `.claude/launch.json` (Konfiguration `kuechensystem`) starten. Claude Code öffnet den Server dann im eigenen Browser-Fenster und kann Konsole und Netzwerkverkehr mitlesen — nötig, um Service Worker, Caches und Offlineverhalten zu prüfen.
+- Berechtigungen und der Sessionstart-Hook (`git fetch --all --prune` plus Statusausgabe) stehen in `.claude/settings.json` und gelten auf beiden Rechnern. Lesende Befehle, Tests und Commits laufen ohne Rückfrage; `git push`, `git checkout`, Merges und Änderungen am Anwendungscode werden weiterhin bestätigt. Maschinenlokale Abweichungen gehören in `.claude/settings.local.json` (von Git ignoriert).

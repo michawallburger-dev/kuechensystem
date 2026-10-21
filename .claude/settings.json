@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "permissions": {
+    "allow": [
+      "Read",
+      "Bash(git status:*)",
+      "Bash(git log:*)",
+      "Bash(git diff:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git fetch:*)",
+      "Bash(git remote:*)",
+      "Bash(git switch:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(node --test:*)",
+      "Bash(node --check:*)",
+      "Bash(py -m http.server:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh issue view:*)",
+      "Bash(gh issue list:*)",
+      "Bash(gh run list:*)",
+      "Bash(gh run view:*)",
+      "Edit(docs/**)",
+      "Edit(tests/**)",
+      "Edit(CHANGELOG.md)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git clean:*)",
+      "Bash(git checkout -- :*)",
+      "Bash(rm -rf:*)",
+      "Edit(.git/**)",
+      "Read(./**/.env)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "git fetch --all --prune --quiet 2>/dev/null; echo \"## Git-Stand beim Sessionstart\"; git status --short --branch; echo; echo \"Branches (lokal und remote):\"; git branch -a | grep -v HEAD",
+            "timeout": 30,
+            "statusMessage": "Hole Git-Stand von GitHub..."
+          }
+        ]
+      }
+    ]
+  }
+}
